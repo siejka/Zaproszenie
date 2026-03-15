@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Izabela i Krzysztof — Zaproszenie Ślubne</title>
+
+    <meta property="og:title" content="Izabela i Krzysztof — Zaproszenie Ślubne">
+    <meta property="og:description" content="Będzie nam niezmiernie miło, jeśli zechcecie świętować z nami ten wyjątkowy dzień.">
+    <meta property="og:image" content="https://siejka.github.io/Zaproszenie/podglad.jpg">
+    <meta property="og:url" content="https://siejka.github.io/Zaproszenie/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --green: #3f533f;
@@ -20,9 +29,10 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- RÓŻE --- */
+        /* --- RESPONSYWNE RÓŻE --- */
         .flower {
             position: fixed;
             width: 25vw;
@@ -34,7 +44,188 @@
             background-repeat: no-repeat;
             pointer-events: none;
             z-index: 100;
-            transition: filter 0.8s ease;
+            transition: filter 0.8s ease, opacity 0.5s ease;
+        }
+        .tl { top: -40px; left: -60px; transform: rotate(-10deg); }
+        .br { bottom: -40px; right: -60px; transform: rotate(170deg); }
+
+        .flower.light { filter: brightness(0) invert(1) sepia(0.2) opacity(0.35); }
+        .flower.dark { filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(0.6) brightness(0.4) opacity(0.25); }
+
+        /* --- SEKCJA POWITALNA (HERO) --- */
+        .hero {
+            background: var(--green);
+            color: var(--gold);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .names { font-family: 'Great Vibes', cursive; font-size: clamp(70px, 18vw, 130px); margin: 0; line-height: 1.1; }
+        .invitation-text { letter-spacing: 5px; font-size: clamp(14px, 3vw, 18px); text-transform: uppercase; margin: 30px 0; }
+        .hero .venue { font-size: clamp(18px, 4vw, 22px); margin: 20px 0; font-weight: bold; border-top: 1px solid rgba(216,194,162,0.2); border-bottom: 1px solid rgba(216,194,162,0.2); padding: 15px 0; width: 80%; max-width: 400px; }
+        .hero .date { font-size: clamp(16px, 3.5vw, 20px); letter-spacing: 2px; }
+
+        section {
+            max-width: 700px;
+            margin: auto;
+            padding: 80px 25px;
+            text-align: center;
+        }
+
+        .poem-box {
+            font-style: italic;
+            background: rgba(216, 194, 162, 0.15);
+            padding: 30px;
+            border: 1px solid var(--gold);
+            margin: 40px 0;
+            font-size: 18px;
+        }
+
+        /* --- BLACK TIE FIX --- */
+        .style-section { margin-top: 80px; padding: 20px 0; }
+        .style-label { font-size: 18px; display: block; margin-bottom: 10px; }
+        .fancy-style { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: clamp(70px, 18vw, 110px); 
+            color: var(--green); 
+            display: block;
+            margin-top: 40px; 
+            line-height: 1.2; 
+        }
+
+        .maps-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 18px 40px;
+            background: var(--green);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- TIMER --- */
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 40px; }
+        .timer-unit { background: white; padding: 15px 5px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .t-num { display: block; font-size: clamp(24px, 5vw, 36px); font-weight: bold; color: var(--green); }
+        .timer-unit span:not(.t-num) { font-size: 11px; text-transform: uppercase; color: #888; }
+
+        /* --- RSVP --- */
+        form { width: 100%; max-width: 450px; margin: 40px auto; background: white; padding: clamp(20px, 8vw, 40px); border-radius: 12px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.05); box-sizing: border-box; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0 20px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; font-family: inherit; }
+        .btn { background: var(--green); color: var(--gold); border: none; width: 100%; padding: 20px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 15px; }
+
+        @media (max-width: 480px) {
+            section { padding: 60px 20px; }
+            .fancy-style { margin-top: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="flower-tl" class="flower tl light"></div>
+    <div id="flower-br" class="flower br light"></div>
+
+    <div class="hero" id="hero-bg">
+        <div class="names">Izabela i Krzysztof</div>
+        <div class="invitation-text">Mają zaszczyt zaprosić</div>
+        <p>Na ceremonię zaślubin oraz przyjęcie weselne</p>
+        <div class="venue">HOTEL ARCHE KLASZTOR — WROCŁAW</div>
+        <div class="date">11 LIPCA 2026 • GODZINA 16:00</div>
+    </div>
+
+    <section>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Lokalizacja</h2>
+        <p>Uroczystość i przyjęcie odbędą się w pięknym<br><strong>Hotelu Arche Klasztor we Wrocławiu</strong>.</p>
+        <p style="font-size: 0.9em; color: #666;">aleja Jana Kasprowicza 64/66, 51-137 Wrocław</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Arche+Klasztor+Wrocław&query_place_id=ChIJwRxnhZzpD0cRdrH7HxmHsIA" target="_blank" class="maps-btn">Otwórz w Google Maps</a>
+    </section>
+
+    <section>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Szanowni Goście</h2>
+        <div class="poem-box">
+            "Zamiast kwiatów, które zwiędną w ciszy,<br>
+            prosimy o wino lub książkę, którą się usłyszy.<br>
+            Niech każda strona i każdy łyk wina,<br>
+            ten piękny dzień nam przypomina."
+        </div>
+        
+        <div class="style-section">
+            <span class="style-label">Będziemy wdzięczni za zachowanie stylu:</span>
+            <span class="fancy-style">Black Tie</span>
+        </div>
+    </section>
+
+    <section>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Do ślubu pozostało</h2>
+        <div class="timer-grid">
+            <div class="timer-unit"><span id="d" class="t-num">0</span><span>Dni</span></div>
+            <div class="timer-unit"><span id="h" class="t-num">00</span><span>Godz</span></div>
+            <div class="timer-unit"><span id="m" class="t-num">00</span><span>Min</span></div>
+            <div class="timer-unit"><span id="s" class="t-num">00</span><span>Sek</span></div>
+        </div>
+    </section>
+
+    <section id="rsvp">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">RSVP</h2>
+        <p>Prosimy o potwierdzenie do <strong>30 kwietnia 2026 r.</strong></p>
+        <form action="https://formsubmit.co/izabellasiejka@gmail.com" method="POST">
+            <input type="text" name="name" placeholder="Imię i Nazwisko" required>
+            <select name="attendance" required>
+                <option value="" disabled selected>Czy potwierdzasz przybycie?</option>
+                <option value="Tak">Będę obecny(a)</option>
+                <option value="Nie">Niestety nie mogę</option>
+            </select>
+            <textarea name="message" placeholder="Uwagi (dieta, osoba towarzysząca)" rows="3"></textarea>
+            <button type="submit" class="btn">Wyślij potwierdzenie</button>
+        </form>
+    </section>
+
+    <script>
+        // TIMER
+        const weddingDate = new Date("July 11, 2026 16:00:00").getTime();
+        function updateTimer() {
+            const now = new Date().getTime();
+            const gap = weddingDate - now;
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            if (gap > 0) {
+                document.getElementById("d").innerText = Math.floor(gap / day);
+                document.getElementById("h").innerText = Math.floor((gap % day) / hour).toString().padStart(2, '0');
+                document.getElementById("m").innerText = Math.floor((gap % hour) / minute).toString().padStart(2, '0');
+                document.getElementById("s").innerText = Math.floor((gap % minute) / second).toString().padStart(2, '0');
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // RÓŻE (DYNAMICS)
+        const flowerTl = document.getElementById('flower-tl');
+        const flowerBr = document.getElementById('flower-br');
+        const heroBg = document.getElementById('hero-bg');
+
+        function checkFlowers() {
+            const heroBottom = heroBg.getBoundingClientRect().bottom;
+            // Górna róża (TL)
+            if (heroBottom < 100) flowerTl.className = 'flower tl dark';
+            else flowerTl.className = 'flower tl light';
+            // Dolna róża (BR)
+            if (heroBottom < (window.innerHeight - 100)) flowerBr.className = 'flower br dark';
+            else flowerBr.className = 'flower br light';
+        }
+
+        window.addEventListener('scroll', checkFlowers);
+        window.addEventListener('resize', checkFlowers);
+        checkFlowers();
+    </script>
+</body>
+</html>            transition: filter 0.8s ease;
         }
         .tl { top: -40px; left: -60px; transform: rotate(-10deg); }
         .br { bottom: -40px; right: -60px; transform: rotate(170deg); }
