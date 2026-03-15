@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Izabela i Krzysztof — Zaproszenie Ślubne</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
@@ -20,28 +20,31 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- SUBTELNE RÓŻE (STALE W ROGACH) --- */
+        /* --- RESPONSYWNE RÓŻE --- */
         .flower {
             position: fixed;
-            width: 320px;
-            height: 320px;
+            width: 25vw; /* Skaluje się z szerokością okna */
+            min-width: 180px;
+            max-width: 350px;
+            aspect-ratio: 1/1;
             background-image: url('rose.png');
             background-size: contain;
             background-repeat: no-repeat;
             pointer-events: none;
             z-index: 100;
-            transition: filter 0.8s ease; 
+            transition: filter 0.8s ease, opacity 0.5s ease;
         }
 
-        .tl { top: -60px; left: -80px; transform: rotate(-10deg); }
-        .br { bottom: -60px; right: -80px; transform: rotate(170deg); }
+        .tl { top: -5%; left: -8%; transform: rotate(-10deg); }
+        .br { bottom: -5%; right: -8%; transform: rotate(170deg); }
 
         .flower.light { filter: brightness(0) invert(1) sepia(0.2) opacity(0.35); }
-        .flower.dark { filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(0.6) brightness(0.4) opacity(0.3); }
+        .flower.dark { filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(0.6) brightness(0.4) opacity(0.25); }
 
-        /* --- SEKCJA POWITALNA --- */
+        /* --- SEKCJA POWITALNA (FLUID) --- */
         .hero {
             background: var(--green);
             color: var(--gold);
@@ -51,71 +54,134 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
-            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .names { font-family: 'Great Vibes', cursive; font-size: clamp(80px, 20vw, 130px); margin: 0; line-height: 1; }
-        .invitation-text { letter-spacing: 5px; font-size: 18px; text-transform: uppercase; margin: 30px 0; }
-        .hero p { text-transform: uppercase; font-size: 16px; letter-spacing: 1px; }
-        .hero .venue { font-size: 22px; margin: 20px 0; font-weight: bold; }
-        .hero .date { font-size: 20px; letter-spacing: 2px; }
+        .names { 
+            font-family: 'Great Vibes', cursive; 
+            font-size: clamp(60px, 18vw, 140px); 
+            margin: 0; 
+            line-height: 1.1; 
+        }
 
+        .invitation-text { 
+            letter-spacing: clamp(2px, 1vw, 6px); 
+            font-size: clamp(14px, 3vw, 20px); 
+            text-transform: uppercase; 
+            margin: 20px 0; 
+        }
+
+        .hero p { 
+            text-transform: uppercase; 
+            font-size: clamp(12px, 2.5vw, 16px); 
+            margin: 5px 0;
+        }
+
+        .hero .venue { 
+            font-size: clamp(16px, 4vw, 24px); 
+            margin: 20px 0; 
+            font-weight: bold;
+            padding: 10px 0;
+            border-top: 1px solid rgba(216, 194, 162, 0.2);
+            border-bottom: 1px solid rgba(216, 194, 162, 0.2);
+        }
+
+        /* --- TREŚĆ I ODSTĘPY --- */
         section {
-            max-width: 800px;
+            max-width: 700px;
             margin: auto;
-            padding: 100px 20px;
+            padding: clamp(60px, 10vh, 100px) 25px;
             text-align: center;
         }
 
         .poem-box {
             font-style: italic;
-            background: rgba(216, 194, 162, 0.15);
-            padding: 40px;
+            background: rgba(216, 194, 162, 0.1);
+            padding: clamp(20px, 5vw, 40px);
             border: 1px solid var(--gold);
-            margin: 40px 0;
-            font-size: 18px;
+            margin: 30px 0;
+            font-size: clamp(16px, 3.5vw, 19px);
         }
 
-        .style-section {
-            margin-top: 100px;
-            padding-bottom: 20px;
-        }
-
+        .style-section { margin-top: clamp(60px, 12vw, 100px); }
+        
         .fancy-style { 
             font-family: 'Great Vibes', cursive; 
-            font-size: clamp(65px, 15vw, 95px); 
+            font-size: clamp(60px, 15vw, 100px); 
             color: var(--green); 
-            display: block;
-            margin-top: 50px;
-            line-height: 1;
+            margin-top: 30px;
+            line-height: 0.9;
         }
 
         .maps-btn {
             display: inline-block;
-            margin-top: 30px;
-            padding: 18px 40px;
+            margin-top: 25px;
+            padding: 15px 30px;
             background: var(--green);
             color: var(--gold);
             text-decoration: none;
             border-radius: 4px;
             font-weight: bold;
             text-transform: uppercase;
+            font-size: 14px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* --- TIMER --- */
-        .timer-grid { display: flex; justify-content: center; gap: 15px; margin-top: 40px; }
-        .timer-unit { background: white; padding: 20px; border-radius: 8px; min-width: 80px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .t-num { display: block; font-size: 36px; font-weight: bold; color: var(--green); }
+        /* --- RESPONSYWNY TIMER --- */
+        .timer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; 
+            margin-top: 30px; 
+        }
+        .timer-unit { 
+            background: white; 
+            padding: 15px 5px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+        }
+        .t-num { display: block; font-size: clamp(20px, 5vw, 32px); font-weight: bold; color: var(--green); }
+        .timer-unit span:not(.t-num) { font-size: 11px; text-transform: uppercase; color: #888; }
 
-        /* --- RSVP --- */
-        form { max-width: 450px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
-        input, select, textarea { width: 100%; padding: 14px; margin: 10px 0 25px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
-        .btn { background: var(--green); color: var(--gold); border: none; width: 100%; padding: 20px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 16px; }
+        /* --- FORMULARZ (MOBILE FIRST) --- */
+        form { 
+            width: 100%; 
+            max-width: 450px; 
+            margin: 30px auto; 
+            background: white; 
+            padding: clamp(20px, 8vw, 40px); 
+            border-radius: 12px; 
+            text-align: left; 
+            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+        }
+        input, select, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 8px 0 20px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-size: 16px; /* Zapobiega auto-zoomowi na iPhone */
+            font-family: inherit;
+        }
+        .btn { 
+            background: var(--green); 
+            color: var(--gold); 
+            border: none; 
+            width: 100%; 
+            padding: 18px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            font-size: 15px; 
+        }
 
-        @media (max-width: 600px) { 
-            .flower { width: 220px; height: 220px; } 
+        @media (max-width: 480px) {
+            .tl { top: -30px; left: -40px; }
+            .br { bottom: -30px; right: -40px; }
+            .flower { width: 180px; }
+            section { padding: 60px 20px; }
         }
     </style>
 </head>
@@ -126,7 +192,7 @@
 
     <div class="hero" id="hero-bg">
         <div class="names">Izabela i Krzysztof</div>
-        <div class="invitation-text">MAJĄ ZASZCZYT ZAPROSIĆ</div>
+        <div class="invitation-text">Mają zaszczyt zaprosić</div>
         <p>Na ceremonię zaślubin oraz przyjęcie weselne</p>
         <div class="venue">HOTEL ARCHE KLASZTOR — WROCŁAW</div>
         <div class="date">11 LIPCA 2026 • GODZINA 16:00</div>
@@ -134,8 +200,8 @@
 
     <section>
         <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Lokalizacja</h2>
-        <p style="font-size: 18px;">Uroczystość i przyjęcie odbędą się w pięknym<br><strong>Hotelu Arche Klasztor we Wrocławiu</strong>.</p>
-        <p>aleja Jana Kasprowicza 64/66, 51-137 Wrocław</p>
+        <p>Uroczystość i przyjęcie odbędą się w pięknym<br><strong>Hotelu Arche Klasztor we Wrocławiu</strong>.</p>
+        <p style="font-size: 0.9em; color: #666;">aleja Jana Kasprowicza 64/66, 51-137 Wrocław</p>
         <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Arche+Klasztor+Wrocław" target="_blank" class="maps-btn">Otwórz w Google Maps</a>
     </section>
 
@@ -149,7 +215,7 @@
         </div>
         
         <div class="style-section">
-            <p style="font-size: 18px; margin-bottom: 0;">Będziemy wdzięczni za zachowanie stylu:</p>
+            <p style="margin-bottom: 0;">Będziemy wdzięczni za zachowanie stylu:</p>
             <span class="fancy-style">Black Tie</span>
         </div>
     </section>
@@ -180,7 +246,7 @@
     </section>
 
     <script>
-        // --- TIMER ---
+        // TIMER
         const weddingDate = new Date("July 11, 2026 16:00:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
@@ -196,28 +262,23 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // --- DYNAMICZNE RÓŻE ---
+        // RÓŻE (ADAPTIVE COLOR)
         const flowerTl = document.getElementById('flower-tl');
         const flowerBr = document.getElementById('flower-br');
         const heroBg = document.getElementById('hero-bg');
 
         function checkFlowers() {
             const heroBottom = heroBg.getBoundingClientRect().bottom;
-            
-            // Górna róża
-            if (heroBottom < 150) { 
-                flowerTl.classList.replace('light', 'dark');
-            } else {
-                flowerTl.classList.replace('dark', 'light');
-            }
+            const windowHeight = window.innerHeight;
 
-            // Dolna róża
-            const triggerBr = window.innerHeight - 150;
-            if (heroBottom < triggerBr) {
-                flowerBr.classList.replace('light', 'dark');
-            } else {
-                flowerBr.classList.replace('dark', 'light');
-            }
+            // TL (Góra)
+            if (heroBottom < 100) flowerTl.className = 'flower tl dark';
+            else flowerTl.className = 'flower tl light';
+
+            // BR (Dół)
+            const brTrigger = windowHeight - 100;
+            if (heroBottom < brTrigger) flowerBr.className = 'flower br dark';
+            else flowerBr.className = 'flower br light';
         }
 
         window.addEventListener('scroll', checkFlowers);
