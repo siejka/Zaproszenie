@@ -32,18 +32,17 @@
             background-repeat: no-repeat;
             pointer-events: none;
             z-index: 100;
-            transition: filter 0.5s ease; /* Płynna zmiana */
+            transition: filter 0.8s ease; /* Wolniejsza, płynniejsza zmiana */
         }
 
-        /* Pozycje - trzymamy je sztywno w rogach */
         .tl { top: -60px; left: -80px; transform: rotate(-10deg); }
         .br { bottom: -60px; right: -80px; transform: rotate(170deg); }
 
-        /* Klasy kolorystyczne (przełączane skryptem) */
+        /* Style kolorystyczne */
         .flower.light { filter: brightness(0) invert(1) sepia(0.2) opacity(0.35); }
         .flower.dark { filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(0.6) brightness(0.4) opacity(0.3); }
 
-        /* --- SEKCJA POWITALNA (POWIĘKSZONE NAPISY) --- */
+        /* --- SEKCJA POWITALNA (DUŻE NAPISY) --- */
         .hero {
             background: var(--green);
             color: var(--gold);
@@ -68,7 +67,6 @@
             margin: auto;
             padding: 100px 20px;
             text-align: center;
-            position: relative; /* Potrzebne do obliczeń skryptu */
         }
 
         .poem-box {
@@ -81,10 +79,8 @@
         }
 
         .style-section {
-            margin-top: 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-top: 100px; /* Jeszcze większy odstęp */
+            padding-bottom: 20px;
         }
 
         .fancy-style { 
@@ -92,8 +88,8 @@
             font-size: clamp(65px, 15vw, 95px); 
             color: var(--green); 
             display: block;
-            margin-top: 40px; 
-            line-height: 0.8;
+            margin-top: 50px; /* Black Tie niżej */
+            line-height: 1;
         }
 
         .maps-btn {
@@ -106,7 +102,6 @@
             border-radius: 4px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
@@ -115,13 +110,11 @@
         .t-num { display: block; font-size: 36px; font-weight: bold; color: var(--green); }
 
         form { max-width: 450px; margin: 40px auto; background: white; padding: 40px; border-radius: 12px; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
-        input, select, textarea { width: 100%; padding: 14px; margin: 10px 0 25px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+        input, select, textarea { width: 100%; padding: 14px; margin: 10px 0 25px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
         .btn { background: var(--green); color: var(--gold); border: none; width: 100%; padding: 20px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 16px; }
 
         @media (max-width: 600px) { 
             .flower { width: 220px; height: 220px; } 
-            .tl { top: -40px; left: -60px; }
-            .br { bottom: -40px; right: -60px; }
         }
     </style>
 </head>
@@ -130,7 +123,7 @@
     <div id="flower-tl" class="flower tl light"></div>
     <div id="flower-br" class="flower br light"></div>
 
-    <div class="hero" id="hero-trigger">
+    <div class="hero" id="hero-bg">
         <div class="names">Izabela i Krzysztof</div>
         <div class="invitation-text">MAJĄ ZASZCZYT ZAPROSIĆ</div>
         <p>Na ceremonię zaślubin oraz przyjęcie weselne</p>
@@ -139,14 +132,14 @@
     </div>
 
     <section>
-        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Lokalizacja</h2>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase;">Lokalizacja</h2>
         <p style="font-size: 18px;">Uroczystość i przyjęcie odbędą się w pięknym<br><strong>Hotelu Arche Klasztor we Wrocławiu</strong>.</p>
         <p>aleja Jana Kasprowicza 64/66, 51-137 Wrocław</p>
-        <a href="https://maps.app.goo.gl/F28x3S5ZtqEaA6Lw86" target="_blank" class="maps-btn">Otwórz w Google Maps</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Arche+Klasztor+Wrocław+Kasprowicza+64" target="_blank" class="maps-btn">Otwórz w Google Maps</a>
     </section>
 
     <section>
-        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Szanowni Goście</h2>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase;">Szanowni Goście</h2>
         <div class="poem-box">
             "Zamiast kwiatów, które zwiędną w ciszy,<br>
             prosimy o wino lub książkę, którą się usłyszy.<br>
@@ -161,7 +154,7 @@
     </section>
 
     <section>
-        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">Do ślubu pozostało</h2>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase;">Do ślubu pozostało</h2>
         <div class="timer-grid">
             <div class="timer-unit"><span id="d" class="t-num">0</span><span>Dni</span></div>
             <div class="timer-unit"><span id="h" class="t-num">00</span><span>Godz</span></div>
@@ -171,7 +164,7 @@
     </section>
 
     <section id="rsvp">
-        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase; letter-spacing: 2px;">RSVP</h2>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--green); text-transform: uppercase;">RSVP</h2>
         <p>Prosimy o potwierdzenie do <strong>30 kwietnia 2026 r.</strong></p>
         <form action="https://formsubmit.co/izabellasiejka@gmail.com" method="POST">
             <input type="text" name="name" placeholder="Imię i Nazwisko" required>
@@ -186,7 +179,7 @@
     </section>
 
     <script>
-        // --- TIMER ---
+        // TIMER
         const weddingDate = new Date("July 11, 2026 16:00:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
@@ -202,55 +195,34 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // --- PRECYZYJNA, NIEZALEŻNA ZMIANA KOLORU DLA KAŻDEJ RÓŻY ---
+        // PŁYNNA ZMIANA RÓŻ (OD MOMENTU DOTKNIĘCIA KRAWĘDZI)
         const flowerTl = document.getElementById('flower-tl');
         const flowerBr = document.getElementById('flower-br');
-        const heroTrigger = document.getElementById('hero-trigger');
+        const heroBg = document.getElementById('hero-bg');
 
-        // Funkcja sprawdzająca i aktualizująca kolor jednej róży
-        function updateSingleFlower(flower, anchorBottom, offsetFromWindowEdge) {
-            const windowHeight = window.innerHeight;
+        function checkFlowers() {
+            const heroBottom = heroBg.getBoundingClientRect().bottom;
             
-            // Określamy środek róży na podstawie jej położenia
-            // Jeśli róża jest przyklejona do góry (tl), środek to środek jej wysokości.
-            // Jeśli na dole (br), środek to wysokość okna minus połowa jej wysokości.
-            const flowerMidpoint = (flower.classList.contains('tl')) 
-                ? (flower.offsetHeight / 2) + offsetFromWindowEdge
-                : windowHeight - (flower.offsetHeight / 2) + offsetFromWindowEdge;
-
-            // Zmiana koloru w zależności od położenia względem zielonego tła
-            // Jeśli środek róży jest poniżej zielonego tła
-            if (anchorBottom < flowerMidpoint) {
-                if (flower.classList.contains('light')) {
-                    flower.classList.remove('light');
-                    flower.classList.add('dark');
-                }
+            // GÓRNA RÓŻA: Zmienia kolor gdy tylko jej DOLNA krawędź dotknie jasnego tła
+            if (heroBottom < 260) { // 260px to realna krawędź widoczności róży
+                flowerTl.classList.replace('light', 'dark');
             } else {
-                if (flower.classList.contains('dark')) {
-                    flower.classList.remove('dark');
-                    flower.classList.add('light');
-                }
+                flowerTl.classList.replace('dark', 'light');
+            }
+
+            // DOLNA RÓŻA: Zmienia kolor gdy tylko jej GÓRNA krawędź dotknie jasnego tła
+            // Na dole ekranu (window.innerHeight - wysokość róży)
+            const brTopPosition = window.innerHeight - 260;
+            if (heroBottom < brTopPosition) {
+                flowerBr.classList.replace('light', 'dark');
+            } else {
+                flowerBr.classList.replace('dark', 'light');
             }
         }
 
-        // Reaguj na przewijanie i zmianę rozmiaru okna
-        function handleScrollAndResize() {
-            // Obliczamy położenie dolnej granicy zielonego tła (hero)
-            const heroRect = heroTrigger.getBoundingClientRect();
-            const heroBottom = heroRect.bottom;
-
-            // Niezależne sprawdzenie dla górnej róży
-            updateSingleFlower(flowerTl, heroBottom, -60); // Offset -60 to top margines tl
-
-            // Niezależne sprawdzenie dla dolnej róży
-            updateSingleFlower(flowerBr, heroBottom, 60);  // Offset 60 to bottom margines br
-        }
-
-        window.addEventListener('scroll', handleScrollAndResize);
-        window.addEventListener('resize', handleScrollAndResize);
-        
-        // Wywołaj raz na starcie
-        handleScrollAndResize();
+        window.addEventListener('scroll', checkFlowers);
+        window.addEventListener('resize', checkFlowers);
+        checkFlowers();
     </script>
 </body>
 </html>
